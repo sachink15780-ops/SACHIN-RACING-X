@@ -17,9 +17,12 @@
 <div id="controls"><div class="cluster"><button class="ctl" data-key="left">◀</button><button class="ctl" data-key="right">▶</button></div><div class="cluster"><button class="ctl brake" data-key="brake">Ⅱ</button><button class="ctl nitro" data-key="nitro">N₂O</button><button class="ctl gas" data-key="gas">▲</button></div></div>
 <div id="menu"><div class="panel"><div class="eyebrow">THE RACE IS YOURS</div><h1>SACHIN<br><em>RACING X</em></h1><div class="desc">High-speed 3D street racing. Choose your line, hit the nitro and own the road.</div><div class="actions"><button class="btn wide" onclick="startRace()">▶ START RACING</button><button class="btn alt" onclick="showRoom()">🌐 MULTIPLAYER</button><button class="btn alt" onclick="toast('Hold ▲ to accelerate. Use N₂O for a speed boost.')">? HOW TO PLAY</button></div><div id="room"><input id="roomcode" placeholder="Enter host room code"><button class="btn" onclick="joinRoom()">JOIN</button><button class="btn alt wide" onclick="hostRoom()">CREATE ONLINE ROOM</button></div><div class="hint">Detailed sports car model • 3D highway • Nitro boost • Drift steering • Mobile controls<br>Landscape mode recommended.</div><div class="small">Online rooms are experimental peer-to-peer connections and require internet.</div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 let scene,camera,renderer,car,carRoot,clock,started=false,speed=0,steer=0,lap=1,nitro=100,roadMarks=[],scenery=[],traffic=[],remoteCars=[],peer=null,connections=[],remoteState=null,lastLap=0;
 const keys={left:false,right:false,gas:false,brake:false,nitro:false};const $=id=>document.getElementById(id);
 function toast(s){$('toast').textContent=s;$('toast').style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('toast').style.display='none',2600)}
